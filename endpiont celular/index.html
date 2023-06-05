@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>celulares</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+</head>
+<body>
+<!-- lista de inventario de los celulares que se encuantran en la base de datos  -->
+<div class="container"> 
+<h1 class="text-center">Lista de celulares</h1>
+<br>
+ 
+ <div class="text-center">
+  <button type="button" id="listar" class="btn btn-primary">Listar</button>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar</button>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#buscarModal">buscar</button>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarModal">modificar</button>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eliminarModal">eliminar</button>
+
+</div>
+  <br>
+
+  <br>
+  
+  
+
+
+  <table class="table" id="tabla">
+    <thead>
+        <tr>
+        <th>NIT</th>
+        <th>Marca</th>
+        <th>tamaño</th>
+        <th>capacidad</th>
+        <th>precio</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+
+</table>
+<!-- tabla donde se muestra la lista, falta detalles y agregar funcion de quitar lista al darle click -->
+
+<!-- inicio de crear un nuevo celular --> 
+
+
+<div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">crear un nuevo celular</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+              <div><label class="form-label">NIT</label><input type="text" id="NIT" class="form-control" placeholder="escriba el nit"></div>
+              <div><label class="form-label">Marca</label><input type="text" id="Marca" class="form-control" placeholder="escriba la marca"></div>
+              <div><label class="form-label">tamaño</label><input type="text" id="tamaño" class="form-control" placeholder=" escriba el tamaño"></div>
+              <div><label class="form-label">capacidad</label><input type="text" id="capacidad" class="form-control" placeholder=" escriba la capacidad"></div>
+              <div><label class="form-label">Precio</label><input type=" number" id="precio" class="form-control" placeholder="escriba el precio"></div>
+              <br>
+              
+            
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="crear">crear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--fin de agregar celular-->
+
+
+
+<!--inicio de Buscar Celular por NIt-->
+       
+<div class="modal fade" id="buscarModal" tabindex="-1" aria-labelledby="buscarModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="buscarModalLabel">Buscar por NIT</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="nitInput" class="form-label">NIT:</label>
+            <input type="text" class="form-control" id="nitInput" placeholder="Ingrese el NIT del celular a buscar">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="buscarBtn">Buscar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Información -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="infoModalLabel">Información del Celular</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="infoModalBody">
+        <!-- Aquí se mostrará la información del NIT -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+<!--final de busqueda de celular por nit-->
+
+
+
+<!--inicio de  modificar tabla de celulares, tener en cuenta que se divide en dos, como buscar lo que se va a modificar esta vez sera por medio de NIT lo que hace referente a que hay que hacer una busqueda-->
+
+<!-- Modal de búsqueda -->
+<div class="modal fade" id="modificarModal" tabindex="-1" aria-labelledby="buscarModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="buscarModalLabel">Buscar Celular por NIT</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="nitModi" class="form-label">NIT</label>
+            <input type="text" class="form-control" id="nitModi" placeholder="Ingrese el NIT del celular">
+          </div>
+          <button type="button" class="btn btn-primary" id="buscar">Buscar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de modificación -->
+<div class="modal fade" id="modificar" tabindex="-1" aria-labelledby="modificarModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modificarModalLabel">Modificar Celular</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="modificarForm">
+          <div class="mb-3">
+            <label for="marcaInput" class="form-label">Marca</label>
+            <input type="text" class="form-control" id="marcaInput">
+          </div>
+          <div class="mb-3">
+            <label for="tamanoInput" class="form-label">Tamaño</label>
+            <input type="text" class="form-control" id="tamanoInput">
+          </div>
+          <div class="mb-3">
+            <label for="capacidadInput" class="form-label">Capacidad</label>
+            <input type="text" class="form-control" id="capacidadInput">
+          </div>
+          <div class="mb-3">
+            <label for="precioInput" class="form-label">Precio</label>
+            <input type="text" class="form-control" id="precioInput">
+          </div>
+          <button type="button" class="btn btn-primary" id="guardar">Guardar cambios</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--final de modificar tabala de celulares-->
+<hr>
+
+<!--inicio de modal para eliminar por medio de nit -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar Celular</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="eliNIT" class="form-label">NIT</label>
+            <input type="text" class="form-control" id="eliNIT" placeholder="escriba el nit a eliminar">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="Eliminar" >eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
